@@ -22,13 +22,13 @@ function fetchRegister() {
     fetch(registerEndPoint, {
         method: 'POST',
         headers: {
-            
+            "Content-type" : "application/json"
         },
         body: jsonData
     }).then(response => {
         if (response.ok) {
             return response.json();
-        } 
+        }
     }).then(data => {
         alert("Cadastrado: " + data.username);
     }).catch(error => {

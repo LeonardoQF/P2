@@ -2,18 +2,29 @@ from datetime import datetime, timezone, timedelta
 from typing import Union
 from fastapi import Header, HTTPException, status
 from jose import JWTError, jwt
-
+from fastapi.middleware.cors import CORSMiddleware
 
 SECRET_KEY = "JAVAFORLIFEJAVAISGREAT88228822"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRATION_MINUTES = 30
 
+
+origins = [
+    "http://localhost:966",
+    "http://localhost:8000",
+]
+
+def add_cors(app):
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):
     to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.now(timezone.utc) + expires_delta
-    else:
-        expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRATION_MINUTES)
+    expire = datetime.utcnow() + timedelta(minutes=30)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
@@ -29,15 +40,3 @@ def verify_token(token: str):
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-def verify_token_from_header(authorization: str = Header(...)):
-    try:
-        scheme, token = authorization.split()
-        if scheme.lower() != "bearer":
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid authentication scheme")
-        return verify_token(token)
-    except (ValueError, JWTError):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
-            headers={"WWW-Authenticate": "Bearer"},
-        )

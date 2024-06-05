@@ -1,11 +1,14 @@
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Header,Query
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from typing import Annotated
 from models import UserRegisterer, UserLogger, Token
 from userRepository import isThereADuplicateUser, insertUser, loginUser
-from TokenHandler import create_access_token, verify_token_from_header
+from TokenHandler import create_access_token, verify_token, add_cors
 
 app = FastAPI()
+
+add_cors(app)
 
 @app.get("/")
 def redirectHome():
@@ -32,7 +35,8 @@ def login(user: UserLogger):
     return {"access_token": token, "token_type": "Bearer"}
 
 @app.get("/front/home.html")
-def moveIfAuthorized(current_user: str = Depends(verify_token_from_header)):
-    return {"User authorized": current_user}
+def moveIfAuthorized(token: str = Query(...)):
+    verify_token(token)  
+    return {"User authorized"}
 
 app.mount("/front", StaticFiles(directory="front"), name="front")
