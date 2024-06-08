@@ -4,6 +4,7 @@ var enviar = document.getElementById("enviar");
 enviar.addEventListener('click', function (event) {
     event.preventDefault();
     fetchPokemon();
+    carregarPokemon();
 });
 
 function fetchPokemon() {
@@ -37,7 +38,6 @@ function fetchPokemon() {
         });
 }
 
-
 function extractPokemonInfo(pokemonData) {
     // Parse the JSON data if it's a string
     if (typeof pokemonData === 'string') {
@@ -64,7 +64,6 @@ function extractPokemonInfo(pokemonData) {
     };
 }
 
-
 function storePokemonInfo(pokemonData) {
     // Extract pokemon information using the previous function
     const pokemonInfo = extractPokemonInfo(pokemonData);
@@ -76,3 +75,19 @@ function storePokemonInfo(pokemonData) {
     localStorage.setItem("currentPokemon", stringifiedData);
 }
 
+function carregarPokemon(data) {
+    const pokemonInfo = document.getElementById("pokemon-info");
+  
+    pokemonInfo.innerHTML = `
+        <img src="${data.imageUrl}" alt="${data.name}">
+        <h3>${data.name}</h3>
+        <p><strong>HP:</strong> ${data.baseStats.hp}</p>
+        <p><strong>Attack:</strong> ${data.baseStats.attack}</p>
+        <p><strong>Defense:</strong> ${data.baseStats.defense}</p>
+        <p><strong>Special Attack:</strong> ${data.baseStats["special-attack"]}</p>
+        <p><strong>Special Defense:</strong> ${data.baseStats["special-defense"]}</p>
+        <p><strong>Speed:</strong> ${data.baseStats.speed}</p>
+        <p><strong>Height:</strong> ${data.height}</p>
+        <p><strong>Weight:</strong> ${data.weight}</p>
+    `;
+}
