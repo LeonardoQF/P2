@@ -84,6 +84,8 @@ function carregarPokemon(data) {
 
     const pokemonInfo = document.getElementById("pokemon-details");
 
+    pokemonInfo.style.borderStyle = 'solid';
+
     // Check if data and its properties exist to prevent errors
     if (data && data.baseStats) {
         pokemonInfo.innerHTML = `
@@ -92,11 +94,13 @@ function carregarPokemon(data) {
             <p><strong>HP:</strong> ${data.baseStats.hp}</p>
             <p><strong>Attack:</strong> ${data.baseStats.attack}</p>
             <p><strong>Defense:</strong> ${data.baseStats.defense}</p>
+            <p><strong>Speed:</strong> ${data.baseStats.speed}</p>
             <p><strong>Special Attack:</strong> ${data.baseStats["special-attack"]}</p>
+            <p><strong>Special Defense:</strong> ${data.baseStats["special-defense"]}</p>
             <p><strong>Height:</strong> ${data.height}</p>
             <p><strong>Weight:</strong> ${data.weight}</p>
 
-            <button type="button" id="salvar">salvar</button>
+            <button class="btn btn-warning" type="button" id="salvar">Salvar Pokemon</button>
         `;
     } else {
         console.error("Invalid data or baseStats missing:", data);
