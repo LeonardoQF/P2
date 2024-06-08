@@ -4,14 +4,33 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-image: url('../img/pokemon.png');
+    background-size: 100%;
 }
 
 .search-container {
     position: relative;
     text-align: center;
     width: 300px;
-    margin-top: 30px;
+    margin-top: 250px;
+    padding: 10px 50px;
+    height: 150px;
+
+    border-color: rgba(128, 128, 128, 0.247);
+    border-style: none;
+    border-radius: 30px;
+    border-width: 4px;
+    background-color: rgba(255, 255, 255, 0.575);
+}
+
+.search-btn {
+    margin-top: 1px;
+    width: 45px;
+    height: 36px;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: #c4c4c4;
+    cursor: pointer;
 }
 
 .pokemon-details {
@@ -21,6 +40,7 @@ body {
     border-style: none;
     border-radius: 30px;
     border-width: 4px;
+    background-color: rgba(255, 255, 255, 0.815);
 }
 
 .pokemon-details img {
