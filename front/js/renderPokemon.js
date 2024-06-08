@@ -17,5 +17,7 @@ function carregaPokemon(data) {
       <p><strong>Speed:</strong> ${stats.speed}</p>
       <p><strong>Generation:</strong> ${data.generation || 'N/A'}</p>
       <p><strong>Legendary:</strong> ${data.legendary ? 'Yes' : 'No'}</p>
+
+      <button type="button" id="enviar">Salvar</button>
   `;
 }
