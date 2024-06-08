@@ -2,6 +2,8 @@ from fastapi import Depends, FastAPI, HTTPException, Header,Query
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from typing import Annotated
+
+import uvicorn
 from models import UserRegisterer, UserLogger, Token
 from userRepository import isThereADuplicateUser, insertUser, loginUser
 from TokenHandler import create_access_token, verify_token, add_cors
@@ -29,7 +31,7 @@ def registrarUsuario(user: UserRegisterer):
 def login(user: UserLogger):
     user_data = loginUser(user)
     if user_data is None:
-        raise HTTPException(status_code=401, detail="Usuário ou senha incorretos")
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
     
     token = create_access_token({"username": user_data["username"]})
     return {"access_token": token, "token_type": "Bearer"}
@@ -40,3 +42,7 @@ def moveIfAuthorized(token: str = Query(...)):
     return {"User authorized"}
 
 app.mount("/front", StaticFiles(directory="front"), name="front")
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=5500)
+    

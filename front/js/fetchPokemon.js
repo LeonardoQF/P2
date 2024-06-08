@@ -7,7 +7,7 @@ enviar.addEventListener('click', function (event) {
 });
 
 function fetchPokemon() {
-    let pokemonName = document.getElementById("pokemon").value
+    let pokemonName =  document.getElementById("pokemon").value.toLowerCase();
 
 
     jsonData = JSON.stringify({
