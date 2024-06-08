@@ -1,5 +1,6 @@
 const pokemonEndPoint = "https://pokeapi.co/api/v2/pokemon";
 var enviar = document.getElementById("enviar");
+clearPokemon();
 
 enviar.addEventListener('click', function (event) {
     event.preventDefault();
@@ -35,7 +36,12 @@ function fetchPokemon() {
             carregarPokemon(dataPokemon);
         })
         .catch(error => {
-            console.error(error);
+            console.error("error");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops!',
+                text: 'Pokémon não encontrado!',
+            });
         });
 }
 
@@ -106,4 +112,8 @@ function carregarPokemon(data) {
         console.error("Invalid data or baseStats missing:", data);
         pokemonInfo.innerHTML = `<p>Error: Invalid Pokemon data</p>`;
     }
+}
+
+function clearPokemon() {
+    localStorage.removeItem("currentPokemon");
 }
