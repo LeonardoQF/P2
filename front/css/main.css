@@ -9,6 +9,7 @@ body {
 }
 
 .search-container {
+    display: none;
     position: relative;
     text-align: center;
     width: 300px;
@@ -71,6 +72,77 @@ body {
     color: #000000;
 }
 
+/* GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG */
+/* GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG */
+/* GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG */
+/* GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG */
+
+.panel-container {
+    display: block;
+    position: relative;
+    text-align: center;
+    width: 500px;
+    margin-top: 100px;
+    padding: 10px 50px;
+    height: 620px;
+
+    border-color: rgba(128, 128, 128, 0.247);
+    border-style: none;
+    border-radius: 30px;
+    border-width: 4px;
+    background-color: rgba(255, 255, 255, 0.575);
+}
+
+.scrollable-panel {
+    width: 400px;
+    height: 480px;
+    overflow-y: auto;
+    margin: 20px auto;
+    padding: 10px;
+
+    border-color: rgba(100, 100, 100, 0.329);
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 4px;
+    background-color: rgba(255, 255, 255, 0.575);
+}
+
+.item {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 5px 0;
+    padding: 58px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.itens-info {
+    display:inline;
+    justify-content: start;
+    align-items: left;
+}
+
+.item img {
+    margin-left: -50px;
+    margin-top: -50px;
+}
+
+
+
+.remove-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+
+
+
 /* SET BACKGROUND COLOR WHEN AUTOCOMPLETING AN INPUT */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -83,21 +155,3 @@ input:-webkit-autofill:active {
     background-color: #3e8a57;
     color: white;
 }
-
-/* .suggestions-list {
-    border: 1px solid #ccc;
-    border-top: none;
-    max-height: 150px;
-    overflow-y: auto;
-    position: absolute;
-    width: 100%;
-    background: #fff;
-    z-index: 1000;
-}
-.suggestion-item {
-    padding: 10px;
-    cursor: pointer;
-}
-.suggestion-item:hover {
-    background-color: #f0f0f0;
-} */
