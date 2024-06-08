@@ -28,9 +28,13 @@ function fetchRegister() {
     }).then(response => {
         if (response.ok) {
             return response.json();
-        }
+        } else throw new Error();
     }).then(data => {
-        alert("Cadastrado: " + data.username);
+        Swal.fire({
+            heightAuto: false,
+            icon: 'success',
+            title: 'Usuário Cadastrado!',
+        });
     }).catch(error => {
         Swal.fire({
             heightAuto: false,
