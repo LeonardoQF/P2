@@ -7,10 +7,10 @@ enviar.addEventListener('click', function (event) {
 });
 
 function fetchPokemon() {
-    let pokemonName =  document.getElementById("pokemon").value.toLowerCase();
+    let pokemonName = document.getElementById("pokemon").value.toLowerCase();
 
     jsonData = JSON.stringify({
-        pokemon : pokemonName
+        pokemon: pokemonName
     });
 
     console.log(jsonData);
@@ -29,11 +29,50 @@ function fetchPokemon() {
             }
         })
         .then(data => {
-            localStorage.setItem("dados", data);
+            storePokemonInfo(data);
             console.log(data);
         })
         .catch(error => {
             console.error(error);
         });
+}
+
+
+function extractPokemonInfo(pokemonData) {
+    // Parse the JSON data if it's a string
+    if (typeof pokemonData === 'string') {
+        pokemonData = JSON.parse(pokemonData);
+    }
+
+    const { name, stats, height, weight, sprites } = pokemonData;
+
+    // Extract base stats
+    const baseStats = {};
+    stats.forEach(stat => {
+        baseStats[stat.stat.name] = stat.base_stat;
+    });
+
+    // Extract front_default image URL
+    const imageUrl = sprites?.front_default;
+
+    return {
+        name,
+        baseStats,
+        height,
+        weight,
+        imageUrl,
+    };
+}
+
+
+function storePokemonInfo(pokemonData) {
+    // Extract pokemon information using the previous function
+    const pokemonInfo = extractPokemonInfo(pokemonData);
+
+    // Stringify the pokemonInfo object before storing
+    const stringifiedData = JSON.stringify(pokemonInfo);
+
+    // Store data in local storage with a key (e.g., "currentPokemon")
+    localStorage.setItem("currentPokemon", stringifiedData);
 }
 
