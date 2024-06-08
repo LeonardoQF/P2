@@ -89,8 +89,11 @@ function carregarPokemon(data) {
     }
 
     const pokemonInfo = document.getElementById("pokemon-details");
+    const container = document.getElementById("search-container");
 
     pokemonInfo.style.borderStyle = 'solid';
+    container.style.height = '690px';
+    container.style.marginTop = '6px';
 
     // Check if data and its properties exist to prevent errors
     if (data && data.baseStats) {
