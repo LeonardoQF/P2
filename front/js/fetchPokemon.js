@@ -4,7 +4,6 @@ var enviar = document.getElementById("enviar");
 enviar.addEventListener('click', function (event) {
     event.preventDefault();
     fetchPokemon();
-    carregarPokemon();
 });
 
 function fetchPokemon() {
@@ -32,6 +31,8 @@ function fetchPokemon() {
         .then(data => {
             storePokemonInfo(data);
             console.log(data);
+            let dataPokemon = localStorage.getItem('currentPokemon');
+            carregarPokemon(dataPokemon);
         })
         .catch(error => {
             console.error(error);
@@ -76,18 +77,29 @@ function storePokemonInfo(pokemonData) {
 }
 
 function carregarPokemon(data) {
-    const pokemonInfo = document.getElementById("pokemon-info");
-  
-    pokemonInfo.innerHTML = `
-        <img src="${data.imageUrl}" alt="${data.name}">
-        <h3>${data.name}</h3>
-        <p><strong>HP:</strong> ${data.baseStats.hp}</p>
-        <p><strong>Attack:</strong> ${data.baseStats.attack}</p>
-        <p><strong>Defense:</strong> ${data.baseStats.defense}</p>
-        <p><strong>Special Attack:</strong> ${data.baseStats["special-attack"]}</p>
-        <p><strong>Special Defense:</strong> ${data.baseStats["special-defense"]}</p>
-        <p><strong>Speed:</strong> ${data.baseStats.speed}</p>
-        <p><strong>Height:</strong> ${data.height}</p>
-        <p><strong>Weight:</strong> ${data.weight}</p>
-    `;
+    // Parse the data if it's in string format
+    if (typeof data === 'string') {
+        data = JSON.parse(data);
+    }
+
+    const pokemonInfo = document.getElementById("pokemon-details");
+
+    // Check if data and its properties exist to prevent errors
+    if (data && data.baseStats) {
+        pokemonInfo.innerHTML = `
+            <img src="${data.imageUrl}" alt="${data.name}">
+            <h3>${data.name}</h3>
+            <p><strong>HP:</strong> ${data.baseStats.hp}</p>
+            <p><strong>Attack:</strong> ${data.baseStats.attack}</p>
+            <p><strong>Defense:</strong> ${data.baseStats.defense}</p>
+            <p><strong>Special Attack:</strong> ${data.baseStats["special-attack"]}</p>
+            <p><strong>Height:</strong> ${data.height}</p>
+            <p><strong>Weight:</strong> ${data.weight}</p>
+
+            <button type="button" id="salvar">salvar</button>
+        `;
+    } else {
+        console.error("Invalid data or baseStats missing:", data);
+        pokemonInfo.innerHTML = `<p>Error: Invalid Pokemon data</p>`;
+    }
 }
