@@ -9,7 +9,6 @@ enviar.addEventListener('click', function (event) {
 function fetchPokemon() {
     let pokemonName = document.getElementById("pokemon").value
 
-
     jsonData = JSON.stringify({
         pokemon : pokemonName
     });

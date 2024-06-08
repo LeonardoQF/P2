@@ -7,18 +7,18 @@
     <title>Home</title>
 </head>
 <body>
-    <!-- <script>
+    <script>
         if (!localStorage.getItem("token")){   
             location.replace("http://127.0.0.1:5500/front/nonAuthError.html");
         }
-    </script> -->
-    <h1 id = msg>Add pokemon</h1>
+    </script>
 
-    <form>
-        <label for = "pokemon">Pokémon: </label>
-        <input type = "text" id = "pokemon">
-        <button type = "button" id = "enviar">enviar</button>
-    </form>
+    <div class="search-container">
+        <h2>Pokemón</h2>
+        <input type="text" class="search-bar" id="pokemon" placeholder="Buscar pokemón">
+        <!-- <div id="suggestions-list" class="suggestions-list"></div> -->
+        <button type = "button" id="enviar">enviar</button>
+    </div>
 
     <script src="/front/js/fetchPokemon.js"></script>
     <script src="/front/js/renderPokemon.js"></script>
