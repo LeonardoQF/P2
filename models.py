@@ -4,13 +4,6 @@ class Token (BaseModel):
     access_token : str
     token_type : str
     
-    
-class Pokemon(BaseModel):
-    name : str
-    height : float
-    weight : float
-    sprite : str
-    
 class UserRegisterer(BaseModel):
     username : str
     password : str
@@ -18,3 +11,19 @@ class UserRegisterer(BaseModel):
 class UserLogger(BaseModel):
     username : str
     password : str
+    
+    
+class BaseStats(BaseModel):
+    hp: int
+    attack: int
+    defense: int
+    special_attack: int
+    special_defense: int
+    speed: int
+
+class Pokemon(BaseModel):
+    name: str
+    baseStats: BaseStats
+    height: float
+    weight: float
+    imageUrl: str
