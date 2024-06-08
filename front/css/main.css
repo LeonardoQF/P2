@@ -11,24 +11,57 @@ body {
     position: relative;
     text-align: center;
     width: 300px;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 
-.pokemon-info {
+.pokemon-details {
     margin-top: 20px;
-    text-align: left;
+    text-align: center;
+    border-color: rgba(128, 128, 128, 0.247);
+    border-style: none;
+    border-radius: 30px;
+    border-width: 4px;
 }
 
-.pokemon-info img {
-    max-width: 100%;
+.pokemon-details img {
+    width: 150px;
+    margin-top: 20px;
+    border-color: rgba(128, 128, 128, 0.247);
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 4px;
+    filter: drop-shadow(0px 4px 4px #6d6d6d);
 }
 
-.pokemon-info h3 {
-    margin-top: 0;
+.pokemon-details h3 {
+    margin-top: 15px;
 }
 
-.pokemon-info p {
+.pokemon-details p {
     margin: 5px 0;
+}
+
+.pokemon-details button {
+    margin: 20px 0px;
+    border-color: rgba(128, 128, 128, 0.247);
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 4px;
+    font-size: 15px;
+    color: #000000;
+}
+
+/* SET BACKGROUND COLOR WHEN AUTOCOMPLETING AN INPUT */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+::selection {
+    background-color: #3e8a57;
+    color: white;
 }
 
 /* .suggestions-list {
