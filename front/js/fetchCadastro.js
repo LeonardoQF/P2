@@ -32,6 +32,11 @@ function fetchRegister() {
     }).then(data => {
         alert("Cadastrado: " + data.username);
     }).catch(error => {
-        console.log(error);
+        Swal.fire({
+            heightAuto: false,
+            icon: 'error',
+            title: 'Usuário já existe',
+            text: 'Tente outro.',
+        });
     });
 }

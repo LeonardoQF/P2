@@ -1,5 +1,5 @@
 from fastapi import Depends, FastAPI, HTTPException, Header,Query, Request
-from fastapi.responses import RedirectResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from typing import Annotated
 
@@ -24,7 +24,7 @@ def sayHi():
 @app.post("/registerUser")
 def registrarUsuario(user: UserRegisterer):
     if isThereADuplicateUser(user.username):
-        raise HTTPException(400, detail="Nome de usuário já cadastrado")
+        raise HTTPException(409, detail="Nome de usuário já cadastrado")
     insertUser(user)
     return user
 
@@ -50,6 +50,10 @@ def addPokemon(request : Request):
 @app.get("/getAllPokemon")
 def getAllPokemon():
     return findAllPokemon()
+
+@app.get("/favicon.ico", include_in_schema=False)
+def return_ico():
+    return FileResponse("/front/img/pokebola.ico")
 
 app.mount("/front", StaticFiles(directory="front"), name="front")
 

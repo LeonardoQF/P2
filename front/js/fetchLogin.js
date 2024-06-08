@@ -33,13 +33,25 @@ function fetchLogin() {
             console.log(data);
             // Store token in localStorage
             localStorage.setItem("token", data.access_token);
-            alert("Logado com sucesso!");
-            // Redirect to home page with the token
+            Swal.fire({
+                heightAuto: false,
+                title: "Logado",
+                text: "Usuário logado com sucesso. Bem vindo",
+                icon: "success",
+            }).then(() => {
             fetchHome();
             location.replace("http://127.0.0.1:5500/front/home.html");
+            })
+            // Redirect to home page with the token
         })
         .catch(error => {
             console.error(error);
+            Swal.fire({
+                heightAuto: false,
+                icon: 'error',
+                title: 'Usuário não encontrado',
+                text: 'Verifique o login e senha',
+            });
         });
 }
 
@@ -54,7 +66,7 @@ function fetchHome() {
     }
     console.log("Token found:", token);
 
-    const url = `${homeEndPoint}?token=${token}`; 
+    const url = `${homeEndPoint}?token=${token}`;
 
     fetch(url, {
         method: 'GET',

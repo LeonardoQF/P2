@@ -7,6 +7,11 @@ enviar.addEventListener('click', function (event) {
     fetchPokemon();
 });
 
+document.getElementById("pokemon-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    fetchPokemon();
+});
+
 function fetchPokemon() {
     let pokemonName = document.getElementById("pokemon").value.toLowerCase();
 
@@ -36,8 +41,9 @@ function fetchPokemon() {
             carregarPokemon(dataPokemon);
         })
         .catch(error => {
-            console.error("error");
+            console.error(error);
             Swal.fire({
+                heightAuto: false,
                 icon: 'error',
                 title: 'Oops!',
                 text: 'Pokémon não encontrado!',
