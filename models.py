@@ -12,7 +12,7 @@ class UserLogger(BaseModel):
     username : str
     password : str
     
-    
+
 class BaseStats(BaseModel):
     hp: int
     attack: int
@@ -27,3 +27,7 @@ class Pokemon(BaseModel):
     height: float
     weight: float
     imageUrl: str
+    
+class AddedPokemon(BaseModel):
+    pokemon : Pokemon
+    addedBy : str
