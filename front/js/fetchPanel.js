@@ -12,8 +12,9 @@ function addItem() {
     newItem.className = 'item';
     newItem.innerHTML = `
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png" alt="mewtwo">
+        <button class="remove-button" onclick="removeItem(this)">Remover</button>
         <div class="itens-info">
-            <h3>mewtwo</h3>
+            <h3><strong>mewtwo</strong></h3>
             <p><strong>HP:</strong>106</p>
             <p><strong>Attack:</strong>110</p>
             <p><strong>Defense:</strong>90</p>
@@ -23,7 +24,6 @@ function addItem() {
             <p><strong>Height:</strong>20</p>
             <p><strong>Weight:</strong>1220</p>
         </div>
-        <button class="remove-button" onclick="removeItem(this)">Remover</button>
     `;
     panel.appendChild(newItem);
 }

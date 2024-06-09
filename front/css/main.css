@@ -9,7 +9,7 @@ body {
 }
 
 .search-container {
-    display: none;
+    display: block;
     position: relative;
     text-align: center;
     width: 300px;
@@ -21,13 +21,13 @@ body {
     border-style: none;
     border-radius: 30px;
     border-width: 4px;
-    background-color: rgba(255, 255, 255, 0.575);
+    background-color: rgba(255, 255, 255, 0.767);
 }
 
 .search-btn {
     margin-top: 1px;
     width: 45px;
-    height: 36px;
+    height: 37px;
     outline-style: solid;
     outline-width: 1px;
     outline-color: #c4c4c4;
@@ -78,11 +78,11 @@ body {
 /* GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG */
 
 .panel-container {
-    display: block;
+    display: none;
     position: relative;
     text-align: center;
     width: 500px;
-    margin-top: 100px;
+    margin-top: 105px;
     padding: 10px 50px;
     height: 620px;
 
@@ -90,7 +90,7 @@ body {
     border-style: none;
     border-radius: 30px;
     border-width: 4px;
-    background-color: rgba(255, 255, 255, 0.575);
+    background-color: rgba(255, 255, 255, 0.767);
 }
 
 .scrollable-panel {
@@ -99,10 +99,10 @@ body {
     overflow-y: auto;
     margin: 20px auto;
     padding: 10px;
+    padding-right: 4px;
 
     border-color: rgba(100, 100, 100, 0.329);
     border-style: solid;
-    border-radius: 30px;
     border-width: 4px;
     background-color: rgba(255, 255, 255, 0.575);
 }
@@ -112,24 +112,29 @@ body {
     border: 1px solid #ccc;
     border-radius: 10px;
     margin: 5px 0;
-    padding: 58px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
-.itens-info {
-    display:inline;
-    justify-content: start;
-    align-items: left;
-}
-
 .item img {
-    margin-left: -50px;
-    margin-top: -50px;
+    width: 140px;
+    height: auto;
+    margin-top: -60px;
 }
 
+.itens-info {
+    display: block;
+    text-align: left;
+    padding: 20px 0px;
+}
 
+.itens-info h3 {
+    font-size: 30px;
+}
+
+.itens-info p {
+    margin-bottom: 4px;
+}
 
 .remove-button {
     background-color: red;
@@ -137,11 +142,11 @@ body {
     border: none;
     padding: 5px;
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 5px;
+    margin-left: -100px;
+    margin-top: 180px;
+    margin-right: 60px;
 }
-
-
-
 
 /* SET BACKGROUND COLOR WHEN AUTOCOMPLETING AN INPUT */
 input:-webkit-autofill,

@@ -99,7 +99,7 @@ function carregarPokemon(data) {
 
     pokemonInfo.style.borderStyle = 'solid';
     container.style.height = '690px';
-    container.style.marginTop = '40px';
+    container.style.marginTop = '105px';
 
     // Check if data and its properties exist to prevent errors
     if (data && data.baseStats) {
@@ -114,7 +114,6 @@ function carregarPokemon(data) {
             <p><strong>Special Defense:</strong> ${data.baseStats["special-defense"]}</p>
             <p><strong>Height:</strong> ${data.height}</p>
             <p><strong>Weight:</strong> ${data.weight}</p>
-
             <button class="btn btn-warning" type="button" id="salvar">Salvar Pokemon</button>
         `;
     } else {
