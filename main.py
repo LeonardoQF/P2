@@ -4,8 +4,8 @@ from fastapi.staticfiles import StaticFiles
 from typing import Annotated
 
 import uvicorn
-from models import UserRegisterer, UserLogger, Token
-from pokemonRepository import findAllPokemon, insertPokemon
+from models import AddedPokemon, PokemonRemover, UserRegisterer, UserLogger, Token
+from pokemonRepository import deletePokemon, findAllPokemon, insertPokemon
 from userRepository import isThereADuplicateUser, insertUser, loginUser
 from TokenHandler import create_access_token, verify_token, add_cors
 
@@ -43,13 +43,20 @@ def moveIfAuthorized(token: str = Query(...)):
     return {"User authorized"}
 
 @app.post("/addPokemon")
-def addPokemon(request : Request):
-    insertPokemon(request)
-    return {"Pokémon adicionado!"}
+def addPokemon(pokemon : AddedPokemon, token : dict = Depends(verify_token)):
+    if (insertPokemon(pokemon)):
+        return {"Pokémon adicionado!"}
+    else: 
+        raise HTTPException(status_code = 422, detail = "Erro no json")
     
 @app.get("/getAllPokemon")
-def getAllPokemon():
+def getAllPokemon(token : dict = Depends(verify_token)):
     return findAllPokemon()
+
+@app.post("/removePokemon")
+def removePokemon(pokemonToRemove : PokemonRemover):
+    deletePokemon(pokemonToRemove)
+        
 
 @app.get("/favicon.ico", include_in_schema=False)
 def return_ico():

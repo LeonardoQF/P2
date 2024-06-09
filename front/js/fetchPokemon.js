@@ -1,5 +1,7 @@
 const pokemonEndPoint = "https://pokeapi.co/api/v2/pokemon";
-var enviar = document.getElementById("enviar");
+const savePokemonUrl = "http://127.0.0.1:8000/addPokemon";
+const enviar = document.getElementById("enviar");
+const token = localStorage.getItem("token");
 clearPokemon();
 
 enviar.addEventListener('click', function (event) {
@@ -14,12 +16,6 @@ document.getElementById("pokemon-form").addEventListener("submit", function (eve
 
 function fetchPokemon() {
     let pokemonName = document.getElementById("pokemon").value.toLowerCase();
-
-    jsonData = JSON.stringify({
-        pokemon: pokemonName
-    });
-
-    console.log(jsonData);
 
     const url = `${pokemonEndPoint}/${pokemonName}`
 
@@ -51,6 +47,49 @@ function fetchPokemon() {
         });
 }
 
+function fetchSalvar() {
+    let pokemonData = localStorage.getItem("currentPokemon");
+
+    let objectPokemon = JSON.parse(pokemonData);
+
+    const decodedToken = jwt_decode(token);
+    const username = decodedToken.username;
+
+    objectPokemon.username = username;
+
+    const jsonData = JSON.stringify(objectPokemon);
+
+    fetch(savePokemonUrl, {
+        method: 'POST',
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: jsonData
+    }).then(response => {
+        if (response.ok) return response.json();
+        else {
+            return response.text().then(errorMessage => {
+                throw new Error(JSON.parse(errorMessage).detail);
+            });
+        }
+    }).then(data => {
+        Swal.fire({
+            heightAuto: false,
+            icon: "success",
+            title: "adicionado",
+            text: `Pokémon ${objectPokemon.name} adicionado com sucesso!`
+        })
+    }).catch(error => {
+        Swal.fire({
+            heightAuto: false,
+            icon: "error",
+            title: "Oops!",
+            text: "Algo deu errado: " + error.message
+        })
+    })
+}
+
 function extractPokemonInfo(pokemonData) {
     // Parse the JSON data if it's a string
     if (typeof pokemonData === 'string') {
@@ -62,7 +101,7 @@ function extractPokemonInfo(pokemonData) {
     // Extract base stats
     const baseStats = {};
     stats.forEach(stat => {
-        baseStats[stat.stat.name] = stat.base_stat;
+        baseStats[stat.stat.name.replace('-', '_')] = stat.base_stat;
     });
 
     // Extract front_default image URL
@@ -110,12 +149,19 @@ function carregarPokemon(data) {
             <p><strong>Attack:</strong> ${data.baseStats.attack}</p>
             <p><strong>Defense:</strong> ${data.baseStats.defense}</p>
             <p><strong>Speed:</strong> ${data.baseStats.speed}</p>
-            <p><strong>Special Attack:</strong> ${data.baseStats["special-attack"]}</p>
-            <p><strong>Special Defense:</strong> ${data.baseStats["special-defense"]}</p>
+            <p><strong>Special Attack:</strong> ${data.baseStats["special_attack"]}</p>
+            <p><strong>Special Defense:</strong> ${data.baseStats["special_defense"]}</p>
             <p><strong>Height:</strong> ${data.height}</p>
             <p><strong>Weight:</strong> ${data.weight}</p>
             <button class="btn btn-warning" type="button" id="salvar">Salvar Pokemon</button>
         `;
+
+        const salvar = document.getElementById("salvar")
+
+        salvar.addEventListener('click', function (event) {
+            event.preventDefault();
+            fetchSalvar();
+        });
     } else {
         console.error("Invalid data or baseStats missing:", data);
         pokemonInfo.innerHTML = `<p>Error: Invalid Pokemon data</p>`;
@@ -125,3 +171,5 @@ function carregarPokemon(data) {
 function clearPokemon() {
     localStorage.removeItem("currentPokemon");
 }
+
+

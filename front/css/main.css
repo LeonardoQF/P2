@@ -160,3 +160,7 @@ input:-webkit-autofill:active {
     background-color: #3e8a57;
     color: white;
 }
+
+#refreshIcon {
+    width : 40px;
+}

@@ -29,5 +29,13 @@ class Pokemon(BaseModel):
     imageUrl: str
     
 class AddedPokemon(BaseModel):
-    pokemon : Pokemon
-    addedBy : str
+    name: str
+    baseStats: BaseStats
+    height: float
+    weight: float
+    imageUrl: str
+    username : str
+    
+class PokemonRemover(BaseModel):
+    name : str
+    username : str

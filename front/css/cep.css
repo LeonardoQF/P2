@@ -34,7 +34,7 @@ body {
 
 .table-container {
     display: none;
-    width: 500px;
+    width: 185px;
     margin-top: 25px;
     height: 300px;
 }
@@ -50,4 +50,10 @@ input:-webkit-autofill:active {
 ::selection {
     background-color: #3e8a57;
     color: white;
+}
+
+.search-container h2,
+.search-container p {
+  text-align: center;
+  display : flexbox;
 }
