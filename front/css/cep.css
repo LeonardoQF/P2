@@ -10,13 +10,13 @@ body {
     display: block;
     position: relative;
     text-align: center;
-    width: 300px;
+    width: 400px;
+    height: 370px;
     margin-top: 220px;
     padding: 10px 50px;
-    height: 150px;
 
     border-color: rgba(128, 128, 128, 0.247);
-    border-style: none;
+    border-style: solid;
     border-radius: 30px;
     border-width: 4px;
     background-color: rgba(255, 255, 255, 0.575);
@@ -34,9 +34,7 @@ body {
 
 .table-container {
     display: none;
-    width: 185px;
     margin-top: 25px;
-    height: 300px;
 }
 
 /* SET BACKGROUND COLOR WHEN AUTOCOMPLETING AN INPUT */

@@ -1,10 +1,18 @@
 const enviar = document.getElementById("enviar");
-const inputCep = document.getElementById("cep")
+const inputCep = document.getElementById("cep");
+
 enviar.addEventListener("click", (event) => {
     event.preventDefault();
     const cep = inputCep.value.trim();
     cep.replace("-", "");
     fetchCepInfo(cep);
+});
+
+document.getElementById("cep-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const cep = inputCep.value.trim();
+    cep.replace("-", "");
+    fetchCepInfo(cep);  
 });
 
 function fetchCepInfo(cep) {
