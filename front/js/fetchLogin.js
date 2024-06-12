@@ -1,4 +1,7 @@
 const loginEndPoint = "http://127.0.0.1:8000/login";
+
+var nameInput = document.getElementById("usuario");
+var passwordInput = document.getElementById('senha');
 var enviar = document.getElementById("enviar");
 
 enviar.addEventListener('click', function (event) {
@@ -6,9 +9,18 @@ enviar.addEventListener('click', function (event) {
     fetchLogin();
 });
 
+nameInput.addEventListener("input", function() {
+    nameInput.setCustomValidity("");
+});
+passwordInput.addEventListener("input", function() {
+    passwordInput.setCustomValidity("");
+});
+
 function fetchLogin() {
-    var username = document.getElementById("usuario").value;
-    var password = document.getElementById("senha").value;
+    if(!formValidation()) return;
+
+    var username = nameInput.value;
+    var password = passwordInput.value;
 
     jsonData = JSON.stringify({
         username: username,
@@ -79,4 +91,37 @@ function fetchHome() {
         .catch(error => {
             console.log(error);
         })
+}
+
+// Validar Formulário
+function formValidation() {
+    if(!validateName()) return false;
+    if(!validatePass(true)) return false;
+    return true;
+}
+
+// Validar Nome
+function validateName() {
+    if(nameInput.value == null || nameInput.value.trim().length <= 0) {
+        nameInput.setCustomValidity("Nome inválido!");
+        nameInput.reportValidity();
+        return false;
+    } else {
+        nameInput.setCustomValidity("");
+        return true;
+    }
+}
+
+// Validar Senha
+function validatePass(showMsg) {
+    if(passwordInput.value == null || passwordInput.value.trim().length <= 0) {
+        if(showMsg) {
+            passwordInput.setCustomValidity("Senha inválida!");
+            passwordInput.reportValidity();
+        }
+        return false;
+    } else {
+        passwordInput.setCustomValidity("");
+        return true;
+    }
 }
